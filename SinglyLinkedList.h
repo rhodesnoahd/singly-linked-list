@@ -13,7 +13,7 @@ class Node
     private:
         T data;
         Node<T>* next;
-        Node(const T& _d) {data = _d; next = nullptr;}
+        Node(const T& value) {data = value; next = nullptr;}
 
         // possible by forward declaration as template
         friend class SinglyLinkedList<T>; 
@@ -26,38 +26,45 @@ class SinglyLinkedList
         Node<T>* head;
         int size;
 
+        // recursive methods
+        void print(const Node<T>*) const;
+        void reversePrint(const Node<T>*) const;
+        Node<T>* reverse(Node<T>*);
+
     public:
-        SinglyLinkedList(); // default constructor
-        ~SinglyLinkedList();
-        SinglyLinkedList(const SinglyLinkedList<T>& _sll); // copy constructor
-        SinglyLinkedList<T>& operator=(const SinglyLinkedList<T>& _sll); // assignment operator
-
-        bool empty() const {return head == nullptr;}
-        bool removeFront();
-        bool removeNode(const T& _d);
-        bool removeEnd();
-        bool removeDuplicates();
+        // default constructor
+        SinglyLinkedList();
         
+        // destructor
+        ~SinglyLinkedList();
 
-        const T& getData(const Node<T>* _n) const {return _n->data;}
-        const T& getData() const {return head->data;}
+        // copy constructor
+        SinglyLinkedList(const SinglyLinkedList<T>& list);
 
-        void addFront(const T& _d);
-        void addEnd(const T& _d);
+        // assignment operator
+        SinglyLinkedList<T>& operator=(const SinglyLinkedList<T>& list);
 
-        void reverse();
+        // in-line
+        bool empty() const {return head == nullptr;}
         Node<T>* getHead() const {return head;}
-        Node<T>* reverse(Node<T>* _n);
+        int getSize() {return size;}
 
+        // add items
+        void addEnd(const T& value);
+        void addFront(const T& value);
+        
+        // remove items
+        bool removeEnd();
+        bool removeFront();
+        bool removeNode(const T& value);
+        bool removeDuplicates();
+
+        // print items
         void print();
-        void print(const Node<T>* n) const;
-        void reversePrint(const Node<T>* _n) const;
+        void reversePrint();
 
-        /** Add the following:
-         * removeDuplicates
-         * removeNodeRecur
-         * sorts: merge, insertion, bubble, quick
-         */
+        // modify order
+        void reverse();        
 };
 
 #endif
